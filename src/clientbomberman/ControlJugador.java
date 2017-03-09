@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -31,7 +33,7 @@ import javax.swing.JPanel;
  *
  * @author lduarte
  */
-public class ControlJugador extends JPanel implements KeyListener{
+public class ControlJugador extends JPanel implements ActionListener, KeyListener{
     private Jugador jugador; 
     private ArrayList<Bomba> bombas;
     private ArrayList<Fire> fire; 
@@ -42,9 +44,10 @@ public class ControlJugador extends JPanel implements KeyListener{
     private Gson gson= new Gson();
     
     
-    public ControlJugador(Jugador jugador, String ip) throws IOException {
+    public ControlJugador(Jugador jugador, String ip,int puerto) throws IOException {
+        //System.out.println("yo ya estoy");
         this.jugador = jugador;
-        client=new ClientUDP(ip);
+        client=new ClientUDP(ip,puerto);
         bombas= new ArrayList(); 
         fire= new ArrayList(); 
         poderes= new ArrayList(); 
@@ -52,6 +55,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         time=estado.getTiempo();
         this.setPreferredSize(new Dimension(800,800));
         addKeyListener(this); 
+        setFocusable(true);
         //jugar();
     }
 
@@ -62,6 +66,13 @@ public class ControlJugador extends JPanel implements KeyListener{
         bombas(g);
         player(g);
         map(g);
+         for(int i=0;i<bombas.size();i++){
+                System.out.println(bombas.size());
+                if(bombas.get(i).getExplodeTime()<time){
+                    System.out.println("siiuuuuuuuu");
+                   explotaBomba(bombas.remove(i));
+                }
+         }
         fires(g);
         repaint();
     }
@@ -119,11 +130,24 @@ public class ControlJugador extends JPanel implements KeyListener{
             }
         }
     }
-    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("EPPPAA");
+         for(int i=0;i<bombas.size();i++){
+                System.out.println(bombas.size());
+                if(bombas.get(i).getExplodeTime()<time){
+                    System.out.println("siiuuuuuuuu");
+                   explotaBomba(bombas.remove(i));
+                }
+         }
+        repaint();
+    }
+    /**
     public void jugar() throws IOException{
         while (jugador.isVivo()){
+            //System.out.println("worrkkkkkkkk");
             //Revizar lo que me mandaron del server
-            String json=client.getData();
+            /**String json=client.getData();
             if(!"".equals(json)){
                 estado = gson.fromJson(json, Estado.class);
             }
@@ -142,17 +166,12 @@ public class ControlJugador extends JPanel implements KeyListener{
             //mandarlo 
                 
          
-            for(int i=0;i<bombas.size();i++){
-                System.out.println(bombas.size());
-                if(bombas.get(i).getExplodeTime()<time){
-                    System.out.println("siiuuuuuuuu");
-                   explotaBomba(bombas.remove(i));
-                }
-            }
-          repaint();
+           
+            }**/
+          //repaint();
             
-        }
-    }
+        //}
+    
     public void generarPoder(int x, int y){
         //Generar Random para ver si lo ponemos o no 
         //Generar Random para el tipo 
@@ -220,8 +239,10 @@ public class ControlJugador extends JPanel implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+        System.out.println("haaaaaaadasdasd");
             switch (key) {
                 case KeyEvent.VK_LEFT:
+                    System.out.println("haaaaaaadasdasd");
                     time++;
                     int x=jugador.getX();
                     if(x>0){
@@ -232,6 +253,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     super.repaint();
                     break;
                 case KeyEvent.VK_RIGHT:
+                    System.out.println("haaaaaaadasdasd");
                     time++;
                     int x1=jugador.getX();
                     if(x1<19){

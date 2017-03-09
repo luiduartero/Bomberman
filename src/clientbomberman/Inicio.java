@@ -8,6 +8,7 @@ package clientbomberman;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -100,13 +101,24 @@ public class Inicio extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         ClientTCP tcp= new ClientTCP();
-        this.setVisible(false);
+        //this.dispose();
+        Jugador j=null; 
         try {
-            tcp.init();
+            j=tcp.init();
         } catch (IOException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        if(j!=null){
+            try {
+                ControlJugador c=new ControlJugador(j, "122.22.22.2",4000);
+                this.setVisible(false);
+                new JuegoFrame(c);
+                //c.jugar();
+            } catch (IOException ex) {
+                Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

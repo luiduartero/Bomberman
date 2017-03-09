@@ -28,7 +28,7 @@ import javax.swing.JProgressBar;
  * @author lduarte
  */
 public class ClientTCP {
-    private String ip; 
+    private String ip="172.20.5.249"; 
 
     public ClientTCP(String ip) {
         this.ip = ip;
@@ -39,23 +39,22 @@ public class ClientTCP {
     
     
     
-    public void init() throws IOException{
+    public Jugador init() throws IOException{
         //Loading
         
         //URL url = ClientTCP.class.getResource("loading_1.gif");
-        Icon icon = new ImageIcon("loading_1.gif");
+       Icon icon = new ImageIcon("loading_1.gif");
         JLabel label = new JLabel(icon);
-        
+        /**
         JFrame f = new JFrame();
         f.getContentPane().add(label);
         f.setSize(800,800);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
         f.setLocationRelativeTo(null);
-        f.setVisible(true);
-
+        f.setVisible(true);**/
         /////////////////////7
-        Socket socket= new Socket(ip,12000);
+        /**Socket socket= new Socket(ip,2407);
         InputStream input=new DataInputStream(socket.getInputStream());
         InputStreamReader isr= new InputStreamReader(input);
         BufferedReader br= new BufferedReader(isr);
@@ -66,41 +65,40 @@ public class ClientTCP {
         response=""; 
         while(response.startsWith("HELO")==false){
             String command = "HELO\n";
-            //System.out.print(command);
+            System.out.print(command);
             os.write(command.getBytes());
-            if(br.readLine()!=null){
-                response = br.readLine();
-            }
+            response = br.readLine();
+            System.out.println(response);
         }
         response=response.replace("HELO ", "");
         int id=Integer.parseInt(response);
         int x=1; 
         int y=1; 
+        int puerto=4000; 
         if(id==1){
             x=18;
+            puerto=4001;
         }if(id==2){
             y=18; 
+             puerto=4002;
         }if(id==3){
             x=18; 
             y=18;
+             puerto=4003;
         }
         Jugador j=new Jugador(id,x,y); 
-        while (response.startsWith("START")){
-            if(br.readLine()!=null){
-                response = br.readLine();
-            }
+        System.out.println("Jugador Iniciado");
+        while (!response.startsWith("START")){
+            System.out.println("neeelll");
+            response = br.readLine();
+            System.out.println(response);
         }
-        socket.close();
-        f.setVisible(false);
-        //GET EL PRIMER ESTADO
-        ControlJugador control=new ControlJugador(j,"127.0.0.1"); 
-        JFrame ventana=new JFrame(); 
-        control.setFocusable(true);
-        ventana.getContentPane().add(control);
-        ventana.pack();
-        ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        control.jugar();
+        System.out.println("cerrando socket");
+        //socket.close();
+        //f.setVisible(false)
+        //GET EL PRIMER ESTADO**/
+        Jugador j=new Jugador(1,1,1); 
+        return j; 
         //
         
     }
