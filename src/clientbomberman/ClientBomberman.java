@@ -5,6 +5,9 @@
  */
 package clientbomberman;
 
+import java.io.IOException;
+import javax.swing.JFrame;
+
 /**
  *
  * @author lduarte
@@ -14,12 +17,16 @@ public class ClientBomberman {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        ControlJugador j=new ControlJugador(null); 
+        Jugador j1=new Jugador(0,1,1);
+        ControlJugador j=new ControlJugador(j1); 
+        JFrame ventana=new JFrame(); 
         j.init();
-        j.setVisible(true);
-        //j.jugar();
+        j.jugar();
+        ventana.add(j);
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         
     }
     
