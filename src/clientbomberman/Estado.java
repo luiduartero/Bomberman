@@ -10,6 +10,7 @@ package clientbomberman;
  * @author lduarte
  */
 public class Estado {
+    private int tiempo=0; 
     private int [][] tablero=new int[][]{
         { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0},
         { 0, -1, -1, -1, -1, -1,  1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0},
@@ -39,6 +40,15 @@ public class Estado {
     public Estado() {
         //tablero=new int [2--1][2--1];
     }
+
+    public int getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
+    }
+    
 
     public int[][] getTablero() {
         return tablero;

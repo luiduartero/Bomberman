@@ -16,7 +16,7 @@ public class Jugador {
     private int cant_muertes=0; 
     private int cant_bombas=0; 
     private int velocidad=1;
-    private int potenciaB=1; 
+    private int potenciaB=3; 
     private int cant_bombasPermitidas=1;
 
     public Jugador(int id, int x, int y) {

@@ -5,6 +5,7 @@
  */
 package clientbomberman;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -33,59 +34,34 @@ public class ControlJugador extends JPanel implements KeyListener{
     private Jugador jugador; 
     private ArrayList<Bomba> bombas;
     private Estado estado; 
+    private int time=0; 
+    private ArrayList<Fire> fire; 
 
-    public ControlJugador(Jugador jugador) {
+    public ControlJugador(Jugador jugador) throws IOException {
         this.jugador = jugador;
         bombas= new ArrayList(); 
+        fire= new ArrayList(); 
         estado=new Estado();
-        this.setSize(800,800);
-        this.addKeyListener(this);
+        time=estado.getTiempo();
+        this.setPreferredSize(new Dimension(800,800));
+        addKeyListener(this); 
+        //jugar();
     }
-    public void init(){
-        GridLayout gL = new GridLayout(20, 20);
-        JPanel panel = new JPanel(gL);
-        int [][] tablero=estado.getTablero();
-        JLabel [][] icons=new JLabel[tablero.length][tablero.length];
-        for(int i=0; i<tablero.length;i++){
-            for(int j=0;j<tablero.length;j++){
-                if(tablero[j][i]==-1){
-                    ImageIcon image=new ImageIcon("camino.png");
-                    icons[j][i]=new JLabel(image);
-                    icons[j][i].setSize(40, 40);
-                }
-                if(tablero[j][i]==0){
-                    ImageIcon image=new ImageIcon("pared.png");
-                    icons[j][i]=new JLabel(image);
-                    icons[j][i].setSize(40, 40);
-                }
-                if(tablero[j][i]==1){
-                    ImageIcon image=new ImageIcon("pared1.png");
-                    icons[j][i]=new JLabel(image);
-                    icons[j][i].setSize(40, 40);
-                }
-            }
-        }
-         for(int i=0; i<tablero.length;i++){
-            for(int j=0;j<tablero.length;j++){
-                panel.add(icons[j][i]);
-            }
-         }
-        this.add(panel);
-        
-    }
+
     @Override
-      public void paint(Graphics g) {
-        Graphics2D d = (Graphics2D) g;
+      public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D d = (Graphics2D) g;
         bombas(g);
         player(g);
         map(g);
+        fires(g);
         repaint();
     }
 
     public void player(Graphics g) {
         try {
-            BufferedImage pImg = ImageIO.read(new File("bomber.png"));
+            BufferedImage pImg = ImageIO.read(new File("bomber_2.png"));
             g.drawImage(pImg, jugador.getX()*40, jugador.getY()*40, null);
         } catch (IOException e) {
         }
@@ -95,6 +71,17 @@ public class ControlJugador extends JPanel implements KeyListener{
             try {
                 BufferedImage pImg = ImageIO.read(new File("bomba.png"));
                 g.drawImage(pImg, bombas.get(i).getX()*40,bombas.get(i).getY()*40, null);
+            } catch (IOException e) {
+            
+            }
+        }
+    }
+    public void fires(Graphics g){
+        for(int i=0; i<fire.size();i++){
+            try {
+                BufferedImage pImg = ImageIO.read(new File("fire.gif"));
+                g.drawImage(pImg, fire.get(i).getX()*40,fire.get(i).getY()*40, null);
+                fire.remove(i);
             } catch (IOException e) {
             
             }
@@ -128,8 +115,64 @@ public class ControlJugador extends JPanel implements KeyListener{
     
     public void jugar() throws IOException{
         while (true){
-          
+            for(int i=0;i<bombas.size();i++){
+                System.out.println(bombas.size());
+                if(bombas.get(i).getExplodeTime()<time){
+                    System.out.println("siiuuuuuuuu");
+                   explotaBomba(bombas.remove(i));
+                }
+            }
+          repaint();
             
+        }
+    }
+    
+    public void explotaBomba(Bomba b){
+        int [][] tablero=estado.getTablero();
+        int potencia=b.getPotencia(); 
+        int x=b.getX();
+        int y=b.getY();
+        for(int i=1;i<=potencia;i++){
+            try{
+                if(tablero[x-i][y]!=0){
+                    fire.add(new Fire(x-i,y));
+                    if(tablero[x-i][y]==1){
+                        tablero[x-i][y]=-1;
+                    }
+                }
+                
+            }catch(Exception e){
+            }
+            try{
+                if(tablero[x][y-i]!=0){
+                    fire.add(new Fire(x,y-i));
+                    if(tablero[x][y-i]==1){
+                        tablero[x][y-i]=-1;
+                    }
+                }
+                
+            }catch(Exception e){
+            }
+             try{
+                if(tablero[x+i][y]!=0){
+                    fire.add(new Fire(x+i,y));
+                    if(tablero[x+i][y]==1){
+                        tablero[x+i][y]=-1;
+                    }
+                }
+                
+            }catch(Exception e){
+            }
+            try{
+                if(tablero[x][y+i]!=0){
+                    fire.add(new Fire(x,y+i));
+                    if(tablero[x][y+i]==1){
+                        tablero[x][y+i]=-1;
+                    }
+                }
+                
+            }catch(Exception e){
+            }
         }
     }
 
@@ -143,7 +186,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         int key = e.getKeyCode();
             switch (key) {
                 case KeyEvent.VK_LEFT:
-                    System.out.println("leeeffft");
+                    time++;
                     int x=jugador.getX();
                     if(x>0){
                         if(estado.getTablero()[x-1][jugador.getY()]==-1){
@@ -153,6 +196,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     super.repaint();
                     break;
                 case KeyEvent.VK_RIGHT:
+                    time++;
                     int x1=jugador.getX();
                     if(x1<19){
                         if(estado.getTablero()[x1+1][jugador.getY()]==-1){
@@ -162,6 +206,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     super.repaint();
                     break;
                 case KeyEvent.VK_UP:
+                    time++;
                     int y=jugador.getY();
                     if(y>0){
                         if(estado.getTablero()[jugador.getX()][y-1]==-1){
@@ -171,6 +216,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     super.repaint();
                     break;
                 case KeyEvent.VK_DOWN:
+                    time++;
                     int y1=jugador.getY();
                     if(y1<19){
                         if(estado.getTablero()[jugador.getX()][y1+1]==-1){
@@ -180,7 +226,9 @@ public class ControlJugador extends JPanel implements KeyListener{
                     super.repaint();
                     break;
                 case KeyEvent.VK_SPACE:
-                    bombas.add(new Bomba(jugador.getId(),jugador.getX(),jugador.getY(),jugador.getPotenciaB()));
+                    Bomba bombina=new Bomba(jugador.getId(),jugador.getX(),jugador.getY(),jugador.getPotenciaB());
+                    bombina.setExplodeTime(time+5);
+                    bombas.add(bombina);
                     super.repaint();
                     break;
             }

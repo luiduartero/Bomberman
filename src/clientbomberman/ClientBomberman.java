@@ -22,11 +22,13 @@ public class ClientBomberman {
         Jugador j1=new Jugador(0,1,1);
         ControlJugador j=new ControlJugador(j1); 
         JFrame ventana=new JFrame(); 
-        j.init();
-        j.jugar();
-        ventana.add(j);
+        j.setFocusable(true);
+        ventana.getContentPane().add(j);
+        ventana.pack();
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        j.jugar();
+       //ventana.setSize(800, 800);
         
     }
     

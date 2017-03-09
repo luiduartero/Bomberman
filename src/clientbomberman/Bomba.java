@@ -14,6 +14,8 @@ public class Bomba {
     private int x; 
     private int y; 
     private int potencia; 
+    private int explodeTime;
+    
 
     public Bomba(int id_jugador, int x, int y, int potencia) {
         this.id_jugador = id_jugador;
@@ -21,6 +23,15 @@ public class Bomba {
         this.y = y;
         this.potencia = potencia;
     }
+
+    public int getExplodeTime() {
+        return explodeTime;
+    }
+
+    public void setExplodeTime(int explodeTime) {
+        this.explodeTime = explodeTime;
+    }
+    
 
     public int getId_jugador() {
         return id_jugador;
