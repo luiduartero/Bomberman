@@ -5,6 +5,7 @@
  */
 package clientbomberman;
 
+import com.google.gson.Gson;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -37,8 +38,13 @@ public class ControlJugador extends JPanel implements KeyListener{
     private ArrayList<Poder> poderes; 
     private Estado estado; 
     private int time=0; 
-    public ControlJugador(Jugador jugador) throws IOException {
+    private ClientUDP client;
+    private Gson gson= new Gson();
+    
+    
+    public ControlJugador(Jugador jugador, String ip) throws IOException {
         this.jugador = jugador;
+        client=new ClientUDP(ip);
         bombas= new ArrayList(); 
         fire= new ArrayList(); 
         poderes= new ArrayList(); 
@@ -115,7 +121,27 @@ public class ControlJugador extends JPanel implements KeyListener{
     }
     
     public void jugar() throws IOException{
-        while (true){
+        while (jugador.isVivo()){
+            //Revizar lo que me mandaron del server
+            String json=client.getData();
+            if(!"".equals(json)){
+                estado = gson.fromJson(json, Estado.class);
+            }
+            //covertir a clase
+            
+            //Sacar jugador 
+            
+            //Tomar listas de valores
+            
+            
+            //revisar si he realizado acciones
+                //mandar la nueva info al server
+                
+            //hacer una instancia 
+            //convertir a json 
+            //mandarlo 
+                
+         
             for(int i=0;i<bombas.size();i++){
                 System.out.println(bombas.size());
                 if(bombas.get(i).getExplodeTime()<time){

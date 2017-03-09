@@ -5,10 +5,67 @@
  */
 package clientbomberman;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author lduarte
  */
 public class ClientUDP {
+    private String ip; 
+    private DatagramSocket socket;
+    private InetAddress address; 
+ 
+
+    public ClientUDP(String ip) {
+         this.ip = ip;
+        try {
+            socket = new DatagramSocket();
+            address=InetAddress.getByName(ip);
+        } catch (SocketException ex) {
+            Logger.getLogger(ClientUDP.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(ClientUDP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getData(){
+        byte[] RecogerServidor_bytes = new byte[1024];
+        DatagramPacket servPaquete = new DatagramPacket(RecogerServidor_bytes,256);
+        try {
+            socket.receive(servPaquete);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientUDP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String cadenaMensaje = new String(RecogerServidor_bytes).trim();
+        return cadenaMensaje; 
+        
+    }
+    public void sendData(String json){
+        //Envio de datos
+        DatagramPacket paquete = new DatagramPacket(json.getBytes(),json.length(),address,4000);
+        try {
+            socket.send(paquete);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientUDP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public void cerrarSesion(){ 
+        socket.close();
+    }
+    
+    
+    
     
 }

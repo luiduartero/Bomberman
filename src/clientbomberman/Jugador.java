@@ -13,6 +13,7 @@ public class Jugador {
     private int id; 
     private int x;
     private int y; 
+    private boolean vivo=true; 
     private int cant_muertes=0; 
     private int cant_bombas=0; 
     private int velocidad=1;
@@ -24,6 +25,15 @@ public class Jugador {
         this.x = x;
         this.y = y;
     }
+
+    public boolean isVivo() {
+        return vivo;
+    }
+
+    public void setVivo(boolean vivo) {
+        this.vivo = vivo;
+    }
+    
     public void MoveIzquierda(){
         x=x-1;    
     }

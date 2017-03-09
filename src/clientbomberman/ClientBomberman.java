@@ -19,15 +19,8 @@ public class ClientBomberman {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        Jugador j1=new Jugador(0,1,1);
-        ControlJugador j=new ControlJugador(j1); 
-        JFrame ventana=new JFrame(); 
-        j.setFocusable(true);
-        ventana.getContentPane().add(j);
-        ventana.pack();
-        ventana.setVisible(true);
-        ventana.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        j.jugar();
+       Inicio i=new Inicio();
+       i.setVisible(true);
        //ventana.setSize(800, 800);
         
     }
