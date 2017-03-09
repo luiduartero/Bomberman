@@ -31,6 +31,7 @@ public class ServerUDP {
      * @param args the command line arguments
      */
     public ServerUDP() throws IOException{
+        estado = new Estado();
         byte [] datos_entrada = new byte[1024];
         
         System.out.println("Servidor iniciando...");
@@ -42,7 +43,7 @@ public class ServerUDP {
         cola = new ColaUDP(max_jugadores);
         
         for(int i=0; i<max_jugadores; i++){
-            RequestServerUDP request = new RequestServerUDP(cola);
+            RequestServerUDP request = new RequestServerUDP(cola, estado);
             Thread thread = new Thread(request);
             thread.start();
             
@@ -52,6 +53,7 @@ public class ServerUDP {
             
             //Socket socket = servidor.accept();
             //socket.receive(entrada);
+            
             cola.put(socket);
             
         }
@@ -64,38 +66,12 @@ public class ServerUDP {
         
         ArrayList<Jugador> clientes = new ArrayList<Jugador>();
               
-         
-        
+
         System.out.println("Iniciando Servidor");
         
         ServerUDP server = new ServerUDP();
         
-        
-        
-        
-        
-//        String cadena; 
-//        String cadena1="";
-//        FileReader f = new FileReader("configuracion.txt");
-//        try (BufferedReader b = new BufferedReader(f)) {
-//            while((cadena = b.readLine())!=null) {
-//                cadena1=cadena1+cadena;
-//            }
-//        }
-//        
-//        //parseo 
-//        String[] result= cadena1.split("\n");
-//        String linea1=result[0];
-//        String []linea1partes=linea1.split("<");
-//        String threadsc=linea1partes[1].substring(0, 1);
-//        System.out.println(threadsc);
-//        
-//        
-//        System.out.println("Iniciando los threads");
-//        
-//
-//
-//        System.out.println("Iniciando Servidor");
+
 
     }
 }

@@ -24,7 +24,7 @@ final class RequestServerUDP implements Runnable {
     private DatagramSocket socket; 
     private ColaUDP cola; 
     private boolean auxiliar=false;
-    private int paso; 
+    Estado estado;
     
 
     public RequestServerUDP( boolean auxiliar, ColaUDP cola) {
@@ -35,6 +35,11 @@ final class RequestServerUDP implements Runnable {
 
     public RequestServerUDP(ColaUDP cola) {
         this.cola=cola; 
+    }
+    
+    public RequestServerUDP(ColaUDP cola, Estado estado) {
+        this.cola = cola; 
+        this.estado =  estado;
     }
 
     public void setSocket(DatagramSocket socket) {
@@ -76,6 +81,7 @@ final class RequestServerUDP implements Runnable {
                  
                  //mandar estado unificado aqui
                  String mensaje_salida = "putos";
+                 
                  
                  datos_salida = mensaje_salida.getBytes();
                  
