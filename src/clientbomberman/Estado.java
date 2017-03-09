@@ -40,6 +40,8 @@ public class Estado {
     private Poder [] poderes; 
 
     public Estado() {
+        jugadores=new Jugador[4];
+        bombas=new Bomba[0];
         //tablero=new int [2--1][2--1];
     }
 

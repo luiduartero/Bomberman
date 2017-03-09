@@ -44,8 +44,8 @@ public class ClientUDP {
     public String getData() throws SocketException, IOException{
         //System.out.println("tratando de recibir");
         //socket.setSoTimeout(1000); 
-        byte[] RecogerServidor_bytes = new byte[1024];
-        DatagramPacket servPaquete = new DatagramPacket(RecogerServidor_bytes,1024);
+        byte[] RecogerServidor_bytes = new byte[4000];
+        DatagramPacket servPaquete = new DatagramPacket(RecogerServidor_bytes,4000);
         socket.setSoTimeout(1000);
         try {
             socket.receive(servPaquete);

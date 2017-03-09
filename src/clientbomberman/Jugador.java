@@ -26,6 +26,10 @@ public class Jugador {
         this.y = y;
     }
 
+    public Jugador(int id) {
+        this.id=id;
+    }
+    
     public boolean isVivo() {
         return vivo;
     }

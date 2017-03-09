@@ -33,8 +33,10 @@ import javax.swing.JPanel;
  *
  * @author lduarte
  */
-public class ControlJugador extends JPanel implements ActionListener, KeyListener{
+public class ControlJugador extends JPanel implements KeyListener{
     private Jugador jugador; 
+    private Jugador [] jugadores= new Jugador[4];
+    private Bomba[] bombs= new Bomba[0];
     private ArrayList<Bomba> bombas;
     private ArrayList<Fire> fire; 
     private ArrayList<Poder> poderes; 
@@ -52,6 +54,8 @@ public class ControlJugador extends JPanel implements ActionListener, KeyListene
         fire= new ArrayList(); 
         poderes= new ArrayList(); 
         estado=new Estado();
+        estado.getJugadores()[jugador.getId()-1]=jugador;
+        jugadores=estado.getJugadores();
         time=estado.getTiempo();
         this.setPreferredSize(new Dimension(800,800));
         addKeyListener(this); 
@@ -66,29 +70,34 @@ public class ControlJugador extends JPanel implements ActionListener, KeyListene
         bombas(g);
         player(g);
         map(g);
-         for(int i=0;i<bombas.size();i++){
-                System.out.println(bombas.size());
-                if(bombas.get(i).getExplodeTime()<time){
-                    System.out.println("siiuuuuuuuu");
-                   explotaBomba(bombas.remove(i));
-                }
-         }
         fires(g);
         repaint();
+        try {
+            update();
+            jugar();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void player(Graphics g) {
-        try {
-            BufferedImage pImg = ImageIO.read(new File("bomber_2.png"));
-            g.drawImage(pImg, jugador.getX()*40, jugador.getY()*40, null);
-        } catch (IOException e) {
+        for(int i=0; i<jugadores.length;i++){
+            if(jugadores[i]!=null){
+                try {
+                    BufferedImage pImg = ImageIO.read(new File("bomber_"+i+".png"));
+                    g.drawImage(pImg, jugadores[i].getX()*40,jugadores[i].getY()*40, null);
+                } catch (IOException e) {
+
+                }
+            }
         }
     }
     public void bombas(Graphics g){
-        for(int i=0; i<bombas.size();i++){
+        for(int i=0; i<bombs.length;i++){
             try {
                 BufferedImage pImg = ImageIO.read(new File("bomba.png"));
-                g.drawImage(pImg, bombas.get(i).getX()*40,bombas.get(i).getY()*40, null);
+                g.drawImage(pImg, bombs[i].getX()*40,bombs[i].getY()*40, null);
             } catch (IOException e) {
             
             }
@@ -130,47 +139,45 @@ public class ControlJugador extends JPanel implements ActionListener, KeyListene
             }
         }
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("EPPPAA");
-         for(int i=0;i<bombas.size();i++){
-                System.out.println(bombas.size());
-                if(bombas.get(i).getExplodeTime()<time){
-                    System.out.println("siiuuuuuuuu");
-                   explotaBomba(bombas.remove(i));
-                }
-         }
-        repaint();
+    
+    public void update(){
+        EstadoClient newEstado=new EstadoClient();
+        newEstado.setJugador(jugador);
+        newEstado.setTablero(estado.getTablero());
+        Bomba [] bombinas=new Bomba[bombas.size()];
+        for(int i=0; i<bombinas.length;i++){
+            bombinas[i]=bombas.get(i);
+        }
+       // 2. Java object to JSON, and assign to a String
+       String jsonInString = gson.toJson(newEstado);
+        System.out.println("envinado");
+        System.out.println(jsonInString);
+        
+       client.sendData(jsonInString);
+        
     }
-    /**
     public void jugar() throws IOException{
-        while (jugador.isVivo()){
+ 
             //System.out.println("worrkkkkkkkk");
             //Revizar lo que me mandaron del server
-            /**String json=client.getData();
-            if(!"".equals(json)){
+            String json=client.getData();
+            //System.out.println("Hola " +json);
+            if(json.length()>10){
                 estado = gson.fromJson(json, Estado.class);
             }
+            jugadores=estado.getJugadores();
+            bombs=estado.getBombas();
+            jugador=estado.getJugadores()[jugador.getId()-1];
             //covertir a clase
-            
             //Sacar jugador 
-            
             //Tomar listas de valores
-            
-            
             //revisar si he realizado acciones
-                //mandar la nueva info al server
-                
+            //mandar la nueva info al server
             //hacer una instancia 
             //convertir a json 
-            //mandarlo 
-                
-         
-           
-            }**/
-          //repaint();
-            
-        //}
+            //mandarlo             
+    }
+    
     
     public void generarPoder(int x, int y){
         //Generar Random para ver si lo ponemos o no 

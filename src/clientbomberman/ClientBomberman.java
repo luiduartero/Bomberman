@@ -31,25 +31,10 @@ public class ClientBomberman {
         control.jugar();**/
       Inicio i=new Inicio();
        i.setVisible(true);
-      /* Gson gson = new Gson();
-       Jugador j=new Jugador(1,1,1);
-       Estado es=new Estado();
-       EstadoClient e=new EstadoClient();
-       e.setJugador(j);
-       e.setTablero(es.getTablero());
-       
-       // 2. Java object to JSON, and assign to a String
-       String jsonInString = gson.toJson(e);
-       ClientUDP udp=new ClientUDP("172.20.7.209",4001);
-       ClientUDP udp1=new ClientUDP("172.20.7.209",4002);
-       for(int i1=0; i1<3; i1++){
-           udp.sendData(jsonInString);
-           udp1.sendData("HOLA ME LLAMO ALVARITO XDxDXd");
-           System.out.println(udp.getData());
-           
-       }
-       */
-       
+       String ip="172.20.7.209";
+      ControlJugador j=new ControlJugador(new Jugador(3,1,18),ip,4003);
+      new JuegoFrame(j);
+
        
        //ventana.setSize(800, 800);
         

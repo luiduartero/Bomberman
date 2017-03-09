@@ -108,17 +108,17 @@ public class Inicio extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(j!=null){
+        /**if(j!=null){
             try {
-                ControlJugador c=new ControlJugador(j, "122.22.22.2",4000);
-                this.setVisible(false);
-                new JuegoFrame(c);
+                //ControlJugador c=new ControlJugador(j, "",4000);
+                //this.setVisible(false);
+                //new JuegoFrame(c);
                 //c.jugar();
             } catch (IOException ex) {
                 Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        }
+        }**/
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
