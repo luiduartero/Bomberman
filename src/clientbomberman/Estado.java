@@ -36,6 +36,8 @@ public class Estado {
     };
     private Jugador [] jugadores; 
     private Bomba [] bombas; 
+    private Fire [] fires;
+    private Poder [] poderes; 
 
     public Estado() {
         //tablero=new int [2--1][2--1];
@@ -74,7 +76,22 @@ public class Estado {
         this.bombas = bombas;
     }
 
-    
-    
+    public Fire[] getFires() {
+        return fires;
+    }
+
+    public void setFires(Fire[] fires) {
+        this.fires = fires;
+    }
+
+    public Poder[] getPoderes() {
+        return poderes;
+    }
+
+    public void setPoderes(Poder[] poderes) {
+        this.poderes = poderes;
+    }
+
+        
     
 }

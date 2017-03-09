@@ -33,14 +33,15 @@ import javax.swing.JPanel;
 public class ControlJugador extends JPanel implements KeyListener{
     private Jugador jugador; 
     private ArrayList<Bomba> bombas;
+    private ArrayList<Fire> fire; 
+    private ArrayList<Poder> poderes; 
     private Estado estado; 
     private int time=0; 
-    private ArrayList<Fire> fire; 
-
     public ControlJugador(Jugador jugador) throws IOException {
         this.jugador = jugador;
         bombas= new ArrayList(); 
         fire= new ArrayList(); 
+        poderes= new ArrayList(); 
         estado=new Estado();
         time=estado.getTiempo();
         this.setPreferredSize(new Dimension(800,800));
@@ -126,6 +127,14 @@ public class ControlJugador extends JPanel implements KeyListener{
             
         }
     }
+    public void generarPoder(int x, int y){
+        //Generar Random para ver si lo ponemos o no 
+        //Generar Random para el tipo 
+    }
+    
+    public void revizarPaso(int x, int y){
+        
+    }
     
     public void explotaBomba(Bomba b){
         int [][] tablero=estado.getTablero();
@@ -138,6 +147,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     fire.add(new Fire(x-i,y));
                     if(tablero[x-i][y]==1){
                         tablero[x-i][y]=-1;
+                       
                     }
                 }
                 
