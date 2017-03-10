@@ -82,7 +82,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         for(int i=0; i<jugadores.length;i++){
             if(jugadores[i]!=null){
                 try {
-                    BufferedImage pImg = ImageIO.read(new File("bomber_"+i+".png"));
+                    BufferedImage pImg = ImageIO.read(new File("bomber_"+(i+1)+".png"));
                     g.drawImage(pImg, jugadores[i].getX()*40,jugadores[i].getY()*40, null);
                 } catch (IOException e) {
 
