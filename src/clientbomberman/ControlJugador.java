@@ -34,8 +34,8 @@ public class ControlJugador extends JPanel implements KeyListener{
     private Jugador [] jugadores= new Jugador[4];
     private Bomba[] bombs= new Bomba[0];
     private ArrayList<Bomba> bombas;
-    private ArrayList<Fire> fire; 
-    private ArrayList<Poder> poderes; 
+    private Fire [] fire= new Fire[0]; 
+    private Poder [] poderes=new Poder[0]; 
     private Estado estado; 
     private int time=0; 
     private ClientUDP client;
@@ -47,8 +47,6 @@ public class ControlJugador extends JPanel implements KeyListener{
         this.jugador = jugador;
         client=new ClientUDP(ip,puerto);
         bombas= new ArrayList(); 
-        fire= new ArrayList(); 
-        poderes= new ArrayList(); 
         estado=new Estado();
         estado.getJugadores()[jugador.getId()-1]=jugador;
         jugadores=estado.getJugadores();
@@ -67,7 +65,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         player(g);
         map(g);
         fires(g);
-        //update();
+        powers(g);
         repaint(); 
        try {
             update();
@@ -103,11 +101,22 @@ public class ControlJugador extends JPanel implements KeyListener{
         }
     }
     public void fires(Graphics g){
-        for(int i=0; i<fire.size();i++){
+        for(int i=0; i<fire.length;i++){
             try {
                 BufferedImage pImg = ImageIO.read(new File("fire.gif"));
-                g.drawImage(pImg, fire.get(i).getX()*40,fire.get(i).getY()*40, null);
-                fire.remove(i);
+                g.drawImage(pImg, fire[i].getX()*40,fire[i].getY()*40, null);
+                //fire.remove(i);
+            } catch (IOException e) {
+            
+            }
+        }
+    }
+    public void powers(Graphics g){
+        for(int i=0; i<poderes.length;i++){
+            try {
+                BufferedImage pImg = ImageIO.read(new File("power_"+poderes[i].getTipo()+".gif"));
+                g.drawImage(pImg, poderes[i].getX()*40,poderes[i].getY()*40, null);
+                //fire.remove(i);
             } catch (IOException e) {
             
             }
@@ -170,6 +179,8 @@ public class ControlJugador extends JPanel implements KeyListener{
             jugadores=estado.getJugadores();
             bombs=estado.getBombas();
             jugador=estado.getJugadores()[jugador.getId()-1];
+            fire=estado.getFires();
+            poderes=estado.getPoderes();
             //covertir a clase
             //Sacar jugador 
             //Tomar listas de valores
@@ -180,65 +191,6 @@ public class ControlJugador extends JPanel implements KeyListener{
             //mandarlo             
     }
     
-    
-    public void generarPoder(int x, int y){
-        //Generar Random para ver si lo ponemos o no 
-        //Generar Random para el tipo 
-    }
-    
-    public void revizarPaso(int x, int y){
-        
-    }
-    
-    public void explotaBomba(Bomba b){
-        int [][] tablero=estado.getTablero();
-        int potencia=b.getPotencia(); 
-        int x=b.getX();
-        int y=b.getY();
-        for(int i=1;i<=potencia;i++){
-            try{
-                if(tablero[x-i][y]!=0){
-                    fire.add(new Fire(x-i,y));
-                    if(tablero[x-i][y]==1){
-                        tablero[x-i][y]=-1;
-                       
-                    }
-                }
-                
-            }catch(Exception e){
-            }
-            try{
-                if(tablero[x][y-i]!=0){
-                    fire.add(new Fire(x,y-i));
-                    if(tablero[x][y-i]==1){
-                        tablero[x][y-i]=-1;
-                    }
-                }
-                
-            }catch(Exception e){
-            }
-             try{
-                if(tablero[x+i][y]!=0){
-                    fire.add(new Fire(x+i,y));
-                    if(tablero[x+i][y]==1){
-                        tablero[x+i][y]=-1;
-                    }
-                }
-                
-            }catch(Exception e){
-            }
-            try{
-                if(tablero[x][y+i]!=0){
-                    fire.add(new Fire(x,y+i));
-                    if(tablero[x][y+i]==1){
-                        tablero[x][y+i]=-1;
-                    }
-                }
-                
-            }catch(Exception e){
-            }
-        }
-    }
 
     @Override
     public void keyTyped(KeyEvent e) {
