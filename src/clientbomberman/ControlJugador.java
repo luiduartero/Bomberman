@@ -6,12 +6,8 @@
 package clientbomberman;
 
 import com.google.gson.Gson;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
+
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -71,8 +67,9 @@ public class ControlJugador extends JPanel implements KeyListener{
         player(g);
         map(g);
         fires(g);
-        repaint();
-        try {
+        //update();
+        repaint(); 
+       try {
             update();
             jugar();
            
@@ -149,10 +146,11 @@ public class ControlJugador extends JPanel implements KeyListener{
         for(int i=0; i<bombinas.length;i++){
             bombinas[i]=bombas.get(i);
         }
+       newEstado.setBombas(bombinas);
        // 2. Java object to JSON, and assign to a String
        String jsonInString = gson.toJson(newEstado);
-        System.out.println("envinado");
-        System.out.println(jsonInString);
+       System.out.println("envinado");
+       System.out.println(jsonInString);
         
        client.sendData(jsonInString);
         
