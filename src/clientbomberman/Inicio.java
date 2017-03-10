@@ -108,17 +108,34 @@ public class Inicio extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /**if(j!=null){
+        if(j!=null){
+            String ip="172.20.7.209";
+            ControlJugador c=null;
             try {
-                //ControlJugador c=new ControlJugador(j, "",4000);
-                //this.setVisible(false);
-                //new JuegoFrame(c);
+                if(j.getId()==0){
+                  j.setId(j.getId()+1);
+                  c=new ControlJugador(j,ip,4001);
+                }
+                if(j.getId()==1){
+                  j.setId(j.getId()+1);
+                  c=new ControlJugador(j,ip,4002);
+                }
+                if(j.getId()==2){
+                  j.setId(j.getId()+1);
+                  c=new ControlJugador(j,ip,4003);
+                }
+                if(j.getId()==3){
+                  j.setId(j.getId()+1);
+                  c=new ControlJugador(j,ip,4004);
+                }
+                this.setVisible(false);
+                new JuegoFrame(c);
                 //c.jugar();
             } catch (IOException ex) {
                 Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        }**/
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

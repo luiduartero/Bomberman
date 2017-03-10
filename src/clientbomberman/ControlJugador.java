@@ -145,6 +145,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         newEstado.setJugador(jugador);
         newEstado.setTablero(estado.getTablero());
         Bomba [] bombinas=new Bomba[bombas.size()];
+        System.out.println(bombinas.length);
         for(int i=0; i<bombinas.length;i++){
             bombinas[i]=bombas.get(i);
         }
@@ -291,6 +292,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     super.repaint();
                     break;
                 case KeyEvent.VK_SPACE:
+                    System.out.println("san bombazoooooo");
                     Bomba bombina=new Bomba(jugador.getId(),jugador.getX(),jugador.getY(),jugador.getPotenciaB());
                     bombina.setExplodeTime(time+5);
                     bombas.add(bombina);

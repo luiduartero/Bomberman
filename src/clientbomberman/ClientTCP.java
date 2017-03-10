@@ -54,7 +54,7 @@ public class ClientTCP {
         f.setLocationRelativeTo(null);
         f.setVisible(true);**/
         /////////////////////7
-        /**Socket socket= new Socket(ip,2407);
+        Socket socket= new Socket(ip,2407);
         InputStream input=new DataInputStream(socket.getInputStream());
         InputStreamReader isr= new InputStreamReader(input);
         BufferedReader br= new BufferedReader(isr);
@@ -97,7 +97,7 @@ public class ClientTCP {
         //socket.close();
         //f.setVisible(false)
         //GET EL PRIMER ESTADO**/
-        Jugador j=new Jugador(1,1,1); 
+        //Jugador j=new Jugador(1,1,1); 
         return j; 
         //
         
