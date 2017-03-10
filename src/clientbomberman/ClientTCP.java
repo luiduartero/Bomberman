@@ -28,7 +28,7 @@ import javax.swing.JProgressBar;
  * @author lduarte
  */
 public class ClientTCP {
-    private String ip="172.20.5.249"; 
+    private String ip="172.20.7.209"; 
 
     public ClientTCP(String ip) {
         this.ip = ip;
