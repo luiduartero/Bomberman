@@ -12,7 +12,7 @@ package clientbomberman;
 public class EstadoClient {
     private Jugador jugador; 
     private int [][] tablero;
-    private Bomba [] bombas;
+    private Bomba [] bombas=new Bomba[0];
 
     public EstadoClient() {
     }

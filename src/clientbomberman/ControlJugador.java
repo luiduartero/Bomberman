@@ -92,11 +92,13 @@ public class ControlJugador extends JPanel implements KeyListener{
     }
     public void bombas(Graphics g){
         for(int i=0; i<bombs.length;i++){
-            try {
-                BufferedImage pImg = ImageIO.read(new File("bomba.png"));
-                g.drawImage(pImg, bombs[i].getX()*40,bombs[i].getY()*40, null);
-            } catch (IOException e) {
-            
+            if(bombs[i]!=null){
+                try {
+                    BufferedImage pImg = ImageIO.read(new File("bomba.png"));
+                    g.drawImage(pImg, bombs[i].getX()*40,bombs[i].getY()*40, null);
+                } catch (IOException e) {
+
+                }
             }
         }
     }
@@ -144,13 +146,14 @@ public class ControlJugador extends JPanel implements KeyListener{
         Bomba [] bombinas=new Bomba[bombas.size()];
         System.out.println(bombinas.length);
         for(int i=0; i<bombinas.length;i++){
-            bombinas[i]=bombas.get(i);
+            bombinas[i]=bombas.remove(i);
+            System.out.println(bombinas[i].getId_jugador());
         }
        newEstado.setBombas(bombinas);
        // 2. Java object to JSON, and assign to a String
        String jsonInString = gson.toJson(newEstado);
-       System.out.println("envinado");
-       System.out.println(jsonInString);
+      // System.out.println("envinado");
+       //System.out.println(jsonInString);
         
        client.sendData(jsonInString);
         
