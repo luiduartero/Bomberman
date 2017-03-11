@@ -102,23 +102,27 @@ public class ControlJugador extends JPanel implements KeyListener{
     }
     public void fires(Graphics g){
         for(int i=0; i<fire.length;i++){
-            try {
-                BufferedImage pImg = ImageIO.read(new File("fire.gif"));
-                g.drawImage(pImg, fire[i].getX()*40,fire[i].getY()*40, null);
-                //fire.remove(i);
-            } catch (IOException e) {
-            
+            if(fire[i]!=null){
+                try {
+                    BufferedImage pImg = ImageIO.read(new File("fire.gif"));
+                    g.drawImage(pImg, fire[i].getX()*40,fire[i].getY()*40, null);
+                    //fire.remove(i);
+                } catch (IOException e) {
+
+                }
             }
         }
     }
     public void powers(Graphics g){
         for(int i=0; i<poderes.length;i++){
-            try {
-                BufferedImage pImg = ImageIO.read(new File("power_"+poderes[i].getTipo()+".gif"));
-                g.drawImage(pImg, poderes[i].getX()*40,poderes[i].getY()*40, null);
-                //fire.remove(i);
-            } catch (IOException e) {
-            
+            if(poderes[i]!=null){
+                try {
+                    BufferedImage pImg = ImageIO.read(new File("power_"+poderes[i].getTipo()+".gif"));
+                    g.drawImage(pImg, poderes[i].getX()*40,poderes[i].getY()*40, null);
+                    //fire.remove(i);
+                } catch (IOException e) {
+
+                }
             }
         }
     }

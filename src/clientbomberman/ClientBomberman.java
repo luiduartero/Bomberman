@@ -32,9 +32,9 @@ public class ClientBomberman {
       //Inicio i=new Inicio();
       //i.setVisible(true);
       String ip="172.20.7.209";
-      ControlJugador j=new ControlJugador(new Jugador(3,1,1),ip,4003);
+      ControlJugador j=new ControlJugador(new Jugador(1,1,1),ip,4001);
       new JuegoFrame(j);
-      ControlJugador j1=new ControlJugador(new Jugador(4,18,1),ip,4004);
+      ControlJugador j1=new ControlJugador(new Jugador(2,18,1),ip,4002);
       new JuegoFrame(j1);
         
                
