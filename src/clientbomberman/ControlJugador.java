@@ -89,8 +89,8 @@ public class ControlJugador extends JPanel implements KeyListener{
     }
 
     public void player(Graphics g) {
-        for(int i=0; i<jugadores.length;i++){
-            if(jugadores[i]!=null){
+        for(int i=0; i<jugadores.length;i++ ){
+            if(jugadores[i]!=null && jugadores[i].isVivo()==true){
                 try {
                     BufferedImage pImg = ImageIO.read(new File("bomber_"+(i+1)+".png"));
                     g.drawImage(pImg, jugadores[i].getX()*40,jugadores[i].getY()*40, null);
