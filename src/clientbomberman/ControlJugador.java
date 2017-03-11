@@ -65,23 +65,28 @@ public class ControlJugador extends JPanel implements KeyListener{
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D d = (Graphics2D) g;
-        bombas(g);
-        player(g);
-        map(g);
-        fires(g);
-        powers(g);
-        repaint(); 
-       try {
-            update();
-            jugar();
-           
-        } catch (IOException ex) {
-            Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if(jugador.isVivo()){
+            bombas(g);
+            player(g);
+            map(g);
+            fires(g);
+            powers(g);
+            repaint();
+            try {
+                update();
+                jugar();
+
+            } catch (IOException ex) {
+                Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+          GameOver(g);
+      }
+        
     }
     public void GameOver(Graphics g){
     	   try {
-               BufferedImage pImg = ImageIO.read(new File("bomba.png"));
+               BufferedImage pImg = ImageIO.read(new File("game_over.png"));
                g.drawImage(pImg,0,0, null);
            } catch (IOException e) {
 
