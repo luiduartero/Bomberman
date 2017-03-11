@@ -57,6 +57,10 @@ public class ControlJugador extends JPanel implements KeyListener{
         //jugar();
     }
 
+    
+    	
+    
+    
     @Override
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -74,6 +78,14 @@ public class ControlJugador extends JPanel implements KeyListener{
         } catch (IOException ex) {
             Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void GameOver(Graphics g){
+    	   try {
+               BufferedImage pImg = ImageIO.read(new File("bomba.png"));
+               g.drawImage(pImg,0,0, null);
+           } catch (IOException e) {
+
+           }   	
     }
 
     public void player(Graphics g) {

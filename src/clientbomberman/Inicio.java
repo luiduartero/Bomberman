@@ -109,7 +109,7 @@ public class Inicio extends javax.swing.JFrame {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(j!=null){
-            String ip="172.20.7.209";
+            String ip="172.20.5.249";
             ControlJugador c=null;
             try {
                 if(j.getId()==0){
