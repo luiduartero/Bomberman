@@ -117,7 +117,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         for(int i=0; i<poderes.length;i++){
             if(poderes[i]!=null){
                 try {
-                    BufferedImage pImg = ImageIO.read(new File("power_"+poderes[i].getTipo()+".gif"));
+                    BufferedImage pImg = ImageIO.read(new File("power_"+poderes[i].getTipo()+".png"));
                     g.drawImage(pImg, poderes[i].getX()*40,poderes[i].getY()*40, null);
                     //fire.remove(i);
                 } catch (IOException e) {
@@ -250,10 +250,13 @@ public class ControlJugador extends JPanel implements KeyListener{
                     break;
                 case KeyEvent.VK_SPACE:
                     System.out.println("san bombazoooooo");
-                    Bomba bombina=new Bomba(jugador.getId(),jugador.getX(),jugador.getY(),jugador.getPotenciaB());
-                    bombina.setExplodeTime(time+5);
-                    bombas.add(bombina);
-                    super.repaint();
+                    if(jugador.getCant_bombasPermitidas()>jugador.getCant_bombas()){
+                        jugador.setCant_bombas(jugador.getCant_bombas()+1);
+                        Bomba bombina=new Bomba(jugador.getId(),jugador.getX(),jugador.getY(),jugador.getPotenciaB());
+                        bombina.setExplodeTime(estado.getTiempo()+30);
+                        bombas.add(bombina);
+                        super.repaint();
+                    }
                     break;
             }
     }

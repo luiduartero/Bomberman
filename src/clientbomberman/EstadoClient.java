@@ -39,8 +39,5 @@ public class EstadoClient {
 
     public void setBombas(Bomba[] bombas) {
         this.bombas = bombas;
-    }
-    
-    
-    
+    }  
 }

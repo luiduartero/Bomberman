@@ -18,7 +18,7 @@ public class Jugador {
     private int cant_bombas=0; 
     private int velocidad=1;
     private int potenciaB=1; 
-    private int cant_bombasPermitidas=1;
+    private int cant_bombasPermitidas=3;
 
     public Jugador(int id, int x, int y) {
         this.id = id;
