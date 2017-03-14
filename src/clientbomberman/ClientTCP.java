@@ -28,7 +28,7 @@ import javax.swing.JProgressBar;
  * @author lduarte
  */
 public class ClientTCP {
-    private String ip="172.20.7.209"; 
+    private String ip="127.0.0.1"; 
 
     public ClientTCP(String ip) {
         this.ip = ip;
@@ -72,19 +72,16 @@ public class ClientTCP {
         }
         response=response.replace("HELO ", "");
         int id=Integer.parseInt(response);
+        id=id+1;
         int x=1; 
-        int y=1; 
-        int puerto=4000; 
-        if(id==1){
+        int y=1;  
+        if(id==2){
             x=18;
-            puerto=4001;
-        }if(id==2){
-            y=18; 
-             puerto=4002;
         }if(id==3){
+            y=18; 
+        }if(id==4){
             x=18; 
             y=18;
-             puerto=4003;
         }
         Jugador j=new Jugador(id,x,y); 
         System.out.println("Jugador Iniciado");

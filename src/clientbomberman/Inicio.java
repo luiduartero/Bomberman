@@ -42,7 +42,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\lduarte\\Documents\\NetBeansProjects\\ClientBomberman\\bomberman.png")); // NOI18N
 
-        jLabel2.setText("Usuario: ");
+        jLabel2.setText("Ip: ");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,23 +109,23 @@ public class Inicio extends javax.swing.JFrame {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(j!=null){
-            String ip="172.20.5.249";
+            String ip=jTextField1.getText();
+            ip="127.0.0.1";
             ControlJugador c=null;
             try {
-                if(j.getId()==0){
-                  j.setId(j.getId()+1);
+                if(j.getId()==1){
+                    System.out.println("1");
                   c=new ControlJugador(j,ip,4001);
                 }
-                if(j.getId()==1){
-                  j.setId(j.getId()+1);
+                if(j.getId()==2){
+                    System.out.println("2");
                   c=new ControlJugador(j,ip,4002);
                 }
-                if(j.getId()==2){
-                  j.setId(j.getId()+1);
+                if(j.getId()==3){
+                    System.out.println("3");
                   c=new ControlJugador(j,ip,4003);
                 }
-                if(j.getId()==3){
-                  j.setId(j.getId()+1);
+                if(j.getId()==4){
                   c=new ControlJugador(j,ip,4004);
                 }
                 this.setVisible(false);

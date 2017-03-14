@@ -98,7 +98,7 @@ public class ControlJugador extends JPanel implements KeyListener{
             if(jugadores[i]!=null && jugadores[i].isVivo()==true){
                 try {
                     BufferedImage pImg = ImageIO.read(new File("bomber_"+(i+1)+".png"));
-                    g.drawImage(pImg, jugadores[i].getX()*40,jugadores[i].getY()*40, null);
+                    g.drawImage(pImg, jugadores[i].getX()*30,jugadores[i].getY()*30, null);
                 } catch (IOException e) {
 
                 }
@@ -110,7 +110,7 @@ public class ControlJugador extends JPanel implements KeyListener{
             if(bombs[i]!=null){
                 try {
                     BufferedImage pImg = ImageIO.read(new File("bomba.png"));
-                    g.drawImage(pImg, bombs[i].getX()*40,bombs[i].getY()*40, null);
+                    g.drawImage(pImg, bombs[i].getX()*30,bombs[i].getY()*30, null);
                 } catch (IOException e) {
 
                 }
@@ -122,7 +122,7 @@ public class ControlJugador extends JPanel implements KeyListener{
             if(fire[i]!=null){
                 try {
                     BufferedImage pImg = ImageIO.read(new File("fire.gif"));
-                    g.drawImage(pImg, fire[i].getX()*40,fire[i].getY()*40, null);
+                    g.drawImage(pImg, fire[i].getX()*30,fire[i].getY()*30, null);
                     //fire.remove(i);
                 } catch (IOException e) {
 
@@ -135,7 +135,7 @@ public class ControlJugador extends JPanel implements KeyListener{
             if(poderes[i]!=null){
                 try {
                     BufferedImage pImg = ImageIO.read(new File("power_"+poderes[i].getTipo()+".png"));
-                    g.drawImage(pImg, poderes[i].getX()*40,poderes[i].getY()*40, null);
+                    g.drawImage(pImg, poderes[i].getX()*30,poderes[i].getY()*30, null);
                     //fire.remove(i);
                 } catch (IOException e) {
 
@@ -152,7 +152,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                 if(tablero[j][i]==0){
                     try {
                         BufferedImage pImg = ImageIO.read(new File("pared.png"));
-                        g.drawImage(pImg, j*40,i*40, null);
+                        g.drawImage(pImg, j*30,i*30, null);
                     } catch (IOException ex) {
                         Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -160,7 +160,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                 if(tablero[j][i]==1){
                      try {
                         BufferedImage pImg = ImageIO.read(new File("pared1.png"));
-                        g.drawImage(pImg, j*40,i*40, null);
+                        g.drawImage(pImg, j*30,i*30, null);
                     } catch (IOException ex) {
                         Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
                     }

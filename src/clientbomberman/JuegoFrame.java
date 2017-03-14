@@ -16,7 +16,7 @@ public class JuegoFrame extends JFrame{
     public JuegoFrame(ControlJugador control) {
         getContentPane().add(control);
         pack();
-        setSize(800,800);
+        setSize(620,630);
         setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);     
     }
