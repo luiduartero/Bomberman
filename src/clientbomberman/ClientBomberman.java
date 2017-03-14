@@ -29,14 +29,14 @@ public class ClientBomberman {
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         control.jugar();**/
-      //Inicio i=new Inicio();
-      //i.setVisible(true);
-      String ip="127.0.0.1";
+      Inicio i=new Inicio();
+      i.setVisible(true);
+      /**String ip="127.0.0.1";
       ControlJugador j=new ControlJugador(new Jugador(1,1,1),ip,4001);
       new JuegoFrame(j);
       ControlJugador j1=new ControlJugador(new Jugador(2,18,1),ip,4002);
       new JuegoFrame(j1);
-        
+       **/ 
                
        
        //ventana.setSize(800, 800);

@@ -100,7 +100,8 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ClientTCP tcp= new ClientTCP();
+        String ip=jTextField1.getText();
+        ClientTCP tcp= new ClientTCP(ip);
         //this.dispose();
         Jugador j=null; 
         try {
@@ -109,8 +110,8 @@ public class Inicio extends javax.swing.JFrame {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(j!=null){
-            String ip=jTextField1.getText();
-            ip="127.0.0.1";
+            //String ip=jTextField1.getText();
+            //ip="127.0.0.1";
             ControlJugador c=null;
             try {
                 if(j.getId()==1){
