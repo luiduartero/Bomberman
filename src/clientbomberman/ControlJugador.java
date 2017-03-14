@@ -121,7 +121,11 @@ public class ControlJugador extends JPanel implements KeyListener{
                 }
             }
         }
-        cantVivos=num;
+        if(estado.getTiempo()<7){
+            cantVivos=0;
+        }else{
+            cantVivos=num;
+        }
     }
     public void bombas(Graphics g){
         for(int i=0; i<bombs.length;i++){
