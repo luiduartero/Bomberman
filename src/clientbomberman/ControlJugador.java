@@ -89,7 +89,7 @@ public class ControlJugador extends JPanel implements KeyListener{
         }else{
           GameOver(g);
             try {
-                update();
+                //update();
                 jugar();
                 jugador.setCant_bombas(numBombas());
             } catch (IOException ex) {
