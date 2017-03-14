@@ -40,7 +40,7 @@ public class Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\lduarte\\Documents\\NetBeansProjects\\ClientBomberman\\bomberman.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clientbomberman/bomberman.png"))); // NOI18N
 
         jLabel2.setText("Ip: ");
 
