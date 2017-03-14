@@ -65,6 +65,7 @@ public class ControlJugador extends JPanel implements KeyListener{
     
     @Override
       public void paintComponent(Graphics g) {
+        System.out.println("hola");
         super.paintComponent(g);
         Graphics2D d = (Graphics2D) g;
         if(jugador.isVivo()){
@@ -88,13 +89,13 @@ public class ControlJugador extends JPanel implements KeyListener{
             }
         }else{
           GameOver(g);
-            try {
+            /**try {
                 //update();
                 jugar();
                 jugador.setCant_bombas(numBombas());
             } catch (IOException ex) {
                 Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }**/
       }
         
     }
