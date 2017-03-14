@@ -41,6 +41,7 @@ public class ControlJugador extends JPanel implements KeyListener{
     private ClientUDP client;
     private Gson gson= new Gson();
     int cont=2;
+    private int cantVivos=0; 
     
     
     public ControlJugador(Jugador jugador, String ip,int puerto) throws IOException {
@@ -68,17 +69,22 @@ public class ControlJugador extends JPanel implements KeyListener{
         Graphics2D d = (Graphics2D) g;
         if(jugador.isVivo()){
             player(g);
-            map(g);
-            fires(g);
-            bombas(g);
-            powers(g);
-            repaint();
-            try {
-                update();
-                jugar();
+            if(cantVivos==1){
+                Ganador(g);
+            }else{
+                map(g);
+                fires(g);
+                bombas(g);
+                powers(g);
+                repaint();
+                try {
+                    update();
+                    jugar();
+                    jugador.setCant_bombas(numBombas());
 
-            } catch (IOException ex) {
-                Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }else{
           GameOver(g);
@@ -93,10 +99,20 @@ public class ControlJugador extends JPanel implements KeyListener{
 
            }   	
     }
+    public void Ganador(Graphics g){
+    	   try {
+               BufferedImage pImg = ImageIO.read(new File("win.jpg"));
+               g.drawImage(pImg,0,0, null);
+           } catch (IOException e) {
+
+           }   	
+    }
 
     public void player(Graphics g) {
+        int num=0;
         for(int i=0; i<jugadores.length;i++ ){
             if(jugadores[i]!=null && jugadores[i].isVivo()==true){
+                num++;
                 try {
                     BufferedImage pImg = ImageIO.read(new File("bomber_"+(i+1)+".png"));
                     g.drawImage(pImg, jugadores[i].getX()*30,jugadores[i].getY()*30, null);
@@ -105,6 +121,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                 }
             }
         }
+        cantVivos=num;
     }
     public void bombas(Graphics g){
         for(int i=0; i<bombs.length;i++){
@@ -199,6 +216,15 @@ public class ControlJugador extends JPanel implements KeyListener{
         
        client.sendData(jsonInString);
         
+    }
+    public int numBombas(){
+        int num=0; 
+        for(int i=0; i<bombs.length;i++){
+            if(bombs[i].getId_jugador()==jugador.getId()){
+                num++;
+            }
+        }
+        return num; 
     }
     public void jugar() throws IOException{
  
