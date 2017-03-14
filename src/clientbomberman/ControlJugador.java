@@ -282,7 +282,7 @@ public class ControlJugador extends JPanel implements KeyListener{
                     if(jugador.getCant_bombasPermitidas()>jugador.getCant_bombas()){
                         jugador.setCant_bombas(jugador.getCant_bombas()+1);
                         Bomba bombina=new Bomba(jugador.getId(),jugador.getX(),jugador.getY(),jugador.getPotenciaB());
-                        bombina.setExplodeTime(estado.getTiempo()+30);
+                        bombina.setExplodeTime(estado.getTiempo()+70);
                         bombas.add(bombina);
                         super.repaint();
                     }
