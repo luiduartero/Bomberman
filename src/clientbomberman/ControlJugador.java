@@ -40,6 +40,7 @@ public class ControlJugador extends JPanel implements KeyListener{
     private int time=0; 
     private ClientUDP client;
     private Gson gson= new Gson();
+    int cont=2;
     
     
     public ControlJugador(Jugador jugador, String ip,int puerto) throws IOException {
@@ -66,10 +67,10 @@ public class ControlJugador extends JPanel implements KeyListener{
         super.paintComponent(g);
         Graphics2D d = (Graphics2D) g;
         if(jugador.isVivo()){
-            bombas(g);
             player(g);
             map(g);
             fires(g);
+            bombas(g);
             powers(g);
             repaint();
             try {
@@ -108,14 +109,25 @@ public class ControlJugador extends JPanel implements KeyListener{
     public void bombas(Graphics g){
         for(int i=0; i<bombs.length;i++){
             if(bombs[i]!=null){
-                try {
-                    BufferedImage pImg = ImageIO.read(new File("bomba.png"));
-                    g.drawImage(pImg, bombs[i].getX()*30,bombs[i].getY()*30, null);
-                } catch (IOException e) {
-
+                if(cont%2==0){
+                    try {
+                        BufferedImage pImg = ImageIO.read(new File("bomba.png"));
+                        g.drawImage(pImg, bombs[i].getX()*30,bombs[i].getY()*30, null);
+                    } catch (IOException e) {
+                    }
+                }else{
+                    try {
+                        BufferedImage pImg = ImageIO.read(new File("bomba_1.png"));
+                        g.drawImage(pImg, bombs[i].getX()*30,bombs[i].getY()*30, null);
+                    } catch (IOException e) {
+                    }
                 }
+            
+
             }
+           
         }
+        cont++;
     }
     public void fires(Graphics g){
         for(int i=0; i<fire.length;i++){
