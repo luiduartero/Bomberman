@@ -88,14 +88,14 @@ public class ControlJugador extends JPanel implements KeyListener{
                 }
             }
         }else{
-          GameOver(g);
-            /**try {
+          //GameOver(g);
+            try {
                 //update();
                 jugar();
                 jugador.setCant_bombas(numBombas());
             } catch (IOException ex) {
                 Logger.getLogger(ControlJugador.class.getName()).log(Level.SEVERE, null, ex);
-            }**/
+            }
       }
         
     }
